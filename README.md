@@ -104,10 +104,71 @@ app.listen(port, () => {
 ## Website overview
 # Design Logical Diagram
 ## Design Logical Diagram
+- draw.io integration
+- markdown all in one
 # Design Database Schema
 ## Design Database Schema
+- mongoDB
+  - collection [table]
+    - profile collection
+    - portfolio collection
+    - user collection
+  - document [row]
+```javascript
+// profile collection
+{
+    overallSkills: ['Leadership', 'Management'],
+    experiences: [
+        {
+            id: '1',
+            title: 'Senior Engineering Manager',
+            company: 'LaGroup',
+            type: 'Full-time',
+            start: new Date(),
+            end: new Date(),
+            skills: ['Leadership;, 'Management'],
+            detail: 'Develop something'
+        },
+    ],
+}
+
+// query patterns
+const profile = db.profile.findOne();
+
+// portfolio collection
+{
+    cover: '',
+    images: ['', ''],
+    detail: 'Develop something',
+    skills: ['Leadership', 'Management'],
+    publishedAt: new Date(),
+    createdAt: new Date(),
+    updatedAt: new Date(),
+}
+
+// query pattern
+const portfolio = db.portfolio.find({}).sort({ publishedAt: -1}).limit(20).skip(0)
+
+const portfolio = db.portfolio.findOne({ _id: ObjectId('1234567890') })
+
+// user collection
+{
+    username: '',
+    password: '',
+}
+// query pattern
+const user = db.users.findOne({ username: 'foo', password: 'bar' })
+```
 # Design API Specification
 ## Design API Specification
+- GET   /v1/portfolios  -- show all portfolios
+- POST  /v1/portfolios -- create a new portfolio
+- GET   /v1/portfolios/123 -- show 123 portfolio
+- PUT   /v1/portfolios/123 -- update 123 portfolio
+- PATCH /v1/portfolios/123 -- update partially 123 portfolio
+
+- [Swagger](https://swagger.io)
+- OpenAPI (Swagger)
 # Summary
 ## Summary
 ## Post-test
